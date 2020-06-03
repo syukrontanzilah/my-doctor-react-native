@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native'
 import { ILLogo, Bckg } from '../../asset'
 import { Button, Gap } from '../../component'
 import { NavigationContainer } from '@react-navigation/native'
+import { colors, fonts } from '../../utils'
 
 const GetStarted = ({navigation}) => {
     return (
@@ -30,7 +31,7 @@ export default GetStarted
 const styles = StyleSheet.create({
     page: {
         padding: 40,
-        backgroundColor:'white',
+        backgroundColor: colors.white,
         flex:1,
         justifyContent:'space-between',
     },
@@ -38,6 +39,6 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: 'green',
         marginTop: 100, 
-        fontFamily:'GlacialIndifference-Regular'
+        fontFamily: fonts.primary[500],
     }
 })

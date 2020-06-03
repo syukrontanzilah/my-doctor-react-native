@@ -1,16 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { IconBackDark } from '../../../asset'
-import { Gap } from '../../atom'
-import { colors } from '../../../utils'
+import { Gap, Button } from '../../atom'
+import { colors, fonts } from '../../../utils'
 
-const Header = () => {
+const Header = ({onPress, title}) => {
     return (
         <View style={styles.container}>
             <View style={{height:40, width:40, alignItems:'center'}}>
-            <IconBackDark />
-            </View>
-            <Text style={styles.text}>Register</Text> 
+            <Button type ='icon-only' icon = 'back-dark' onPress={onPress}/>
+            </View>          
+            <Text style={styles.text}>{title}</Text> 
             <Gap width={40}/>
         </View>
     )
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:20,
         color: colors.text.primary,
-        fontFamily:'GlacialIndifference-Bold',
+        fontFamily: fonts.primary[800],
     }
 })

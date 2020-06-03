@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { Header, Input, Button, Gap } from '../../component'
 import { colors } from '../../utils'
 
-const Register = () => {
+const Register = ({navigation}) => {
     return (
         <View style ={styles.page}>
-            <Header />
+            <Header onPress={()=> navigation.goBack()} title='Regitrasi'/>
 
             <ScrollView style ={styles.content}>
                 <Input label='Full Name' />
