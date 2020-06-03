@@ -4,7 +4,7 @@ import { ILLogo } from '../../asset'
 import { Input, Link, Button, Gap } from '../../component/atom'
 import { colors, fonts } from '../../utils'
 
-const Login = () => {
+const Login = ({navigation}) => {
     return (
         <ScrollView style={styles.page}>
             <View style={{height:80, width:80}}>
@@ -17,7 +17,7 @@ const Login = () => {
             <Gap height={10}/>
             <Link title='Forgot My Password' size={12}/>
             <Gap height={40}/>
-            <Button title='Sign in'/>
+            <Button title='Sign in' onPress={() => navigation.replace('MainApp')}/>
             <Gap height={30}/>
             <Link title = 'Create New Account' size= {16} align='center'/>
         </ScrollView>

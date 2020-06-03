@@ -3,12 +3,19 @@ import GetStarted from './GetStarted'
 import Register from './Register';
 import Login from './Login';
 import UploadFoto from './UploadFoto'
+import Doctor from './Doctor';
+import Message from './Message';
+import Hospital from './Hospital';
+
 
 export {
     Splash,
     GetStarted,
     Register,
     Login,
-    UploadFoto
+    UploadFoto,
+    Doctor,
+    Message,
+    Hospital,
     
 }
