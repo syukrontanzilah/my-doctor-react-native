@@ -1,5 +1,6 @@
 const mainColors = {
     green1: '#0bcad4',
+    green2: '#edfcfd',
     dark1: '#112340',
     dark2: '#495a75',
     grey1: '#7d8797',
@@ -27,5 +28,7 @@ const mainColors = {
             text: mainColors.dark
         }
     },
-    border: mainColors.grey2
+    border: mainColors.grey2,
+    cardLight: mainColors.green2,
+
 }
