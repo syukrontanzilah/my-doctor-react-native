@@ -5,6 +5,7 @@ import DoktorKategori from './DoctorKategori';
 import RatingDoctor from './RatingDoctor';
 import NewsItem from './NewsItem';
 import ListChatDoctor from './ListChatDoctor';
+import ListHospital from './ListHospital'
 
 
 export {
@@ -15,5 +16,6 @@ export {
     RatingDoctor,
     NewsItem,
     ListChatDoctor,
+    ListHospital
     
 }

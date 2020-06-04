@@ -11,7 +11,11 @@ import User2 from './user1.jpg';
 import User3 from './user3.jpg';
 import User4 from './user4.jpg';
 import User5 from './user5.png';
-import Rs1 from './rs1.jpg'
+import Rs1 from './rs1.jpg';
+import Hospital from './hospital.png';
+import Hospital1 from './hospital1.jpg';
+import Hospital2 from './hospital3.jpg';
+import Hospital3 from './hospital4.jpg';
 
 export {
     DummyDoctor1,
@@ -27,5 +31,7 @@ export {
     User3,
     User4,
     User5,
-    Rs1
+    Rs1,
+    Hospital, Hospital1,
+    Hospital2, Hospital3,
 }
