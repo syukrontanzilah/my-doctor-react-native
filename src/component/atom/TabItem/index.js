@@ -6,13 +6,25 @@ import { colors, fonts } from '../../../utils'
 const TabItem = ({title, active, onPress, onLongPress}) => {
     const Icon = () => {
         if(title === 'Doctor'){
-            return active ? <IconDoktorActive/> : <IconDoctor />
+            return active ? <IconDoctor/> : 
+            <View style={{opacity:0.4}}>
+                 <IconDoctor />
+            </View>
+           
         }
         if (title === 'Message'){
-            return active ? <IconMessageActive/> : <IconMessage />
+            return active ? <IconMessage/> : 
+            <View style={{opacity:0.4}}>
+                 <IconMessage />
+            </View>
+           
         }
         if (title === 'Hospital'){
-            return active ? <IconHospitalActive/> : <IconHospital />
+            return active ? <IconHospital/> : 
+            <View style={{opacity:0.4}}>
+               <IconHospital />  
+            </View>
+           
         }
         return < IconDoctor />
     }

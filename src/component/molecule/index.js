@@ -3,7 +3,8 @@ import BottomNavigator from './BottomNavigator';
 import HomeProfile from './HomeProfile';
 import DoktorKategori from './DoctorKategori';
 import RatingDoctor from './RatingDoctor';
-import NewsItem from './NewsItem'
+import NewsItem from './NewsItem';
+import ListChatDoctor from './ListChatDoctor';
 
 
 export {
@@ -13,5 +14,6 @@ export {
     DoktorKategori,
     RatingDoctor,
     NewsItem,
+    ListChatDoctor,
     
 }
