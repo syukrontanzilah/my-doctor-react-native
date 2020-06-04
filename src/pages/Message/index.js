@@ -1,16 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ListChatDoctor } from '../../component'
 import { colors, fonts } from '../../utils'
+import { Doctor1, Doctor2, Doctor3 } from '../../asset'
 
 const Message = () => {
+   const [doctors,] = useState([
+        {
+            id:1,
+            profil: Doctor1,
+            name: 'dr. Alexandra Joanna',
+            chat: 'terima kasih bu atas waktunya..'
+        },
+        {
+            id:2,
+            profil: Doctor2,
+            name: 'dr. Herman Abdullah',
+            chat: 'Makasih ya pak dokter ganteng hehe.'
+        },
+        {
+            id:1,
+            profil: Doctor3,
+            name: 'dr. Muhammad Fikri',
+            chat: 'baik dokter akan saya coba..'
+        },
+
+    ])
     return (
         <View style={styles.page}>
             <View style={styles.content}>
                 <Text style={styles.title}>Messages</Text>
-                <ListChatDoctor />
-                <ListChatDoctor />
-                <ListChatDoctor />
+                {
+                    doctors.map(doctor => {
+                        return <ListChatDoctor
+                        key={doctor.id} 
+                        profil={doctor.profil}
+                        name={doctor.name}
+                        chat={doctor.chat}/>
+                    })
+                }
             </View>
 
 
@@ -34,7 +62,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontFamily: fonts.primary[800],
         color: colors.text.primary,
-        marginTop:30, 
+        marginTop:25, 
         marginLeft:16,
         marginBottom:10
     }

@@ -15,7 +15,7 @@ const Hospital = () => {
             <View style={{ height: 240, }}>
                 <Image style={{ height: undefined, width: undefined, flex: 1, resizeMode: 'cover', opacity: 0.5 }} source={require('../../asset/dummy/hospital4.jpg')} />
                 <View style={{ position: 'absolute', top: 25, alignItems: 'center', alignSelf: 'center' }}>
-                    <Text style={styles.titlearab}>وَ نُنَزِّلُ مِنَ القُرْآنِ مَا هُوَ شِفَاءٌ وَ رَحْمَةٌ لِلْمُؤْمِنِيْنَ</Text>
+                    {/* <Text style={styles.titlearab}>وَ نُنَزِّلُ مِنَ القُرْآنِ مَا هُوَ شِفَاءٌ وَ رَحْمَةٌ لِلْمُؤْمِنِيْنَ</Text> */}
                     <Text style={styles.title}>Nearby Hospital</Text>
                     <Text style={styles.tersedia}>3 Tersedia</Text>
                 </View>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         flex: 1,
         borderRadius: 20,
-        marginTop: -50,
+        marginTop: -80,
         paddingTop: 14,
 
     },

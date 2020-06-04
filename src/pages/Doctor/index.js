@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HomeProfile, DoktorKategori, RatingDoctor, NewsItem, Gap } from '../../component'
 import { fonts, colors } from '../../utils'
+import {JSONCategoryDoctor} from '../../asset'
 
 const Doctor = () => {
     return (
@@ -20,11 +21,14 @@ const Doctor = () => {
                             showsHorizontalScrollIndicator={false} >
                             <View style={styles.doctorCategory}>
                                 <Gap width={32} />
-                                <DoktorKategori />
-                                <DoktorKategori />
-                                <DoktorKategori />
-                                <DoktorKategori />
-                                <DoktorKategori />
+                                {
+                                    JSONCategoryDoctor.data.map(item => {
+                                        return   <DoktorKategori 
+                                        key={item.id}
+                                        category ={item.category}/>
+                                    })
+                                }
+
                                 <Gap width={22} />
 
                             </View>
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
         maxWidth: 209,
     },
     doctorCategory: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     sectionLabel: {
         fontSize: 16, fontFamily: fonts.primary[800],
