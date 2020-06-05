@@ -4,14 +4,14 @@ import { IconBackDark } from '../../../asset'
 import { Gap, Button } from '../../atom'
 import { colors, fonts } from '../../../utils'
 
-const Header = ({onPress, title}) => {
+const Header = ({onPress, title, type}) => {
     return (
-        <View style={styles.container}>
-            <View style={{height:40, width:40, alignItems:'center'}}>
-            <Button type ='icon-only' icon = 'back-dark' onPress={onPress}/>
+        <View style={styles.container(type)}>
+            <View style={{}}>
+            <Button type ='icon-only' icon = {type=== 'dark'? 'back-light' : 'back-dark'} onPress={onPress}/>
             </View>          
-            <Text style={styles.text}>{title}</Text> 
-            <Gap width={40}/>
+            <Text style={styles.text(type)}>{title}</Text> 
+            <Gap width={20}/>
         </View>
     )
 }
@@ -19,17 +19,20 @@ const Header = ({onPress, title}) => {
 export default Header
 
 const styles = StyleSheet.create({
-    container :{
+    container : (type)=> (
+        {
         paddingHorizontal:16,
-        backgroundColor: colors.white,
+        backgroundColor: type === 'dark' ? colors. secondary : colors.white,
         paddingVertical:30, 
         flexDirection:'row', 
-    },
-    text: {
+        borderBottomLeftRadius : type === 'dark' ? 20: 0,
+        borderBottomRightRadius: type === 'dark' ? 20: 0,
+    }),
+    text: (type)=> ({
         flex:1,
         textAlign:'center',
         fontSize:20,
-        color: colors.text.primary,
+        color: type === 'dark' ? colors.white : colors.text.primary,
         fontFamily: fonts.primary[800],
-    }
+    })
 })

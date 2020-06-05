@@ -3,7 +3,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { GetStarted, Splash, Register, Login, UploadFoto, Doctor, Message, Hospital } from '../pages'
+import { GetStarted, Splash, Register, 
+    Login, UploadFoto, Doctor, Message, Hospital, 
+    ChooseDoctor } from '../pages'
 import { BottomNavigator } from '../component';
 
 
@@ -12,8 +14,8 @@ const Tab = createBottomTabNavigator()
 
 const MainApp = () => {
     return (
-        <Tab.Navigator 
-        tabBar={props => <BottomNavigator {...props} /> }
+        <Tab.Navigator
+            tabBar={props => <BottomNavigator {...props} />}
         >
             <Tab.Screen name='Doctor' component={Doctor} />
             <Tab.Screen name='Message' component={Message} />
@@ -28,7 +30,7 @@ const Router = () => {
         <Stack.Navigator
             initialRouteName='Splash'
             screenOptions={{ headerShown: false }}
-            >
+        >
 
             <Stack.Screen
                 name='Splash' component={Splash} />
@@ -44,9 +46,12 @@ const Router = () => {
 
             <Stack.Screen
                 name='UploadFoto' component={UploadFoto} />
-                
+
             <Stack.Screen
                 name='MainApp' component={MainApp} />
+
+            <Stack.Screen
+                name='ChooseDoctor' component={ChooseDoctor} />
 
         </Stack.Navigator>
     )
