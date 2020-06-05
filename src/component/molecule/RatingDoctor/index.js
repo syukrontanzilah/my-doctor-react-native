@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 16,
-        fontFamily: fonts.primary[800],
+        fontFamily: fonts.primary[500],
         color: colors.text.primary
     },
     doctor: {

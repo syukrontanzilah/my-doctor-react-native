@@ -10,9 +10,9 @@ const Chatting = () => {
             <View style={styles.content}>
                 <Text style={styles.chatDate}>Senin, 2 Mei 2020</Text>
 
+                <ChatItem isMe />
                 <ChatItem />
-                <ChatItem />
-                <ChatItem />
+              
             </View>
 
 
