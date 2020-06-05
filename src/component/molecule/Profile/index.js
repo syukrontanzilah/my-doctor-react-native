@@ -1,17 +1,23 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import { User1, User2 } from '../../../asset'
+import { User1, User2, IconRemove } from '../../../asset'
 import { colors, fonts } from '../../../utils'
 
-const Profile = () => {
+const Profile = ({ name, desc, remove }) => {
     return (
         <View style={styles.container}>
             <View style={styles.borderProfile}>
                 <Image style={styles.avatar} source={User2} />
+                {remove && (
+                    <IconRemove style={{ position: 'absolute', bottom: 5, right: 8, backgroundColor: 'white', borderRadius: 100 }} />
+                )}
             </View>
-            <Text style={styles.name}>Zulaikha Alfikriyah</Text>
-            <Text style={styles.profesi}>Finance Officer</Text>
-
+            {name && (
+                <View>
+                    <Text style={styles.name}>{name}</Text>
+                    <Text style={styles.profesi}>{desc}</Text>
+                </View>
+            )}
         </View>
     )
 }
@@ -31,7 +37,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
         justifyContent: 'center',
         alignItems: 'center'
-
     },
     avatar: {
         height: 100,
@@ -39,15 +44,16 @@ const styles = StyleSheet.create({
         borderRadius: 100 / 2
     },
     name: {
-        fontSize:20,
+        fontSize: 20,
         fontFamily: fonts.primary[800],
         color: colors.text.primary,
-        marginTop:16
+        marginTop: 16
     },
-    profesi:{
-        fontSize:16,
+    profesi: {
+        fontSize: 16,
         fontFamily: fonts.primary[500],
         color: colors.text.secondary,
-        marginTop:4
+        marginTop: 4,
+        textAlign: 'center'
     }
 })

@@ -8,7 +8,8 @@ import {
     Login, UploadFoto, Doctor, Message, Hospital,
     ChooseDoctor,
     Chatting,
-    UserProfile
+    UserProfile,
+    EditProfile
 } from '../pages'
 import { BottomNavigator } from '../component';
 
@@ -62,6 +63,9 @@ const Router = () => {
 
             <Stack.Screen
                 name='UserProfile' component={UserProfile} />
+           
+            <Stack.Screen
+                name='EditProfile' component={EditProfile} />
 
         </Stack.Navigator>
     )
