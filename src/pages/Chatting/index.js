@@ -8,8 +8,8 @@ const Chatting = () => {
         <View style={styles.page}>
             <Header type='dark-profile' title='Nabilah Kinarsih' />
             <View style={styles.content}>
-                <Text style={styles.chatDate}>Senin, 2 Mei 2020</Text>
-
+                    <Text style={styles.chatDate}>Senin, 2 Mei 2020</Text>
+             
                 <ChatItem isMe />
                 <ChatItem />
               
@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
         fontSize: 11, fontFamily: fonts.primary[500],
         color: colors.text.secondary,
         marginVertical: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+       
+      
 
 
     }

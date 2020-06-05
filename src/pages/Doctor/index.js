@@ -10,9 +10,9 @@ const Doctor = ({navigation}) => {
             <View style={styles.content}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
-                    <Gap height={30} />
+                    <Gap height={20} />
                     <View style={{paddingHorizontal:16}}>
-                       <HomeProfile />
+                       <HomeProfile onPress={()=> navigation.navigate('UserProfile')} />
                     <Text style={styles.welcome}>Mau Konsultasi dengan siapa hari ini?</Text>
                     </View>
                  

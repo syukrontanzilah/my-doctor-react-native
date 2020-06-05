@@ -10,6 +10,10 @@ import IconStart from './star.svg';
 import IconNext  from './next-arrow.svg';
 import IconSend from './send.svg';
 import IconSendActive from './send-active.svg';
+import IconEditProfile from './edit.svg';
+import IconLanguage from './language.svg';
+import IconRate from './rating.svg';
+import IconHelp from './help.svg';
 
 
 export {
@@ -25,5 +29,7 @@ export {
     IconBackLight,
     IconSend,
     IconSendActive,
+    IconEditProfile, IconLanguage,
+    IconRate, IconHelp,
 
 }

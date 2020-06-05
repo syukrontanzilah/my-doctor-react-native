@@ -4,10 +4,11 @@ import HomeProfile from './HomeProfile';
 import DoktorKategori from './DoctorKategori';
 import RatingDoctor from './RatingDoctor';
 import NewsItem from './NewsItem';
-import ListChatDoctor from './ListChatDoctor';
+import List from './List';
 import ListHospital from './ListHospital';
 import ChatItem from './ChatItem';
-import InputChat from './InputChat'
+import InputChat from './InputChat';
+import Profile from './Profile'
 
 
 export {
@@ -17,8 +18,8 @@ export {
     DoktorKategori,
     RatingDoctor,
     NewsItem,
-    ListChatDoctor,
+    List,
     ListHospital,
     ChatItem,
-    InputChat,
+    InputChat, Profile
 }

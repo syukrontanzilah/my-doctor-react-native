@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { User2, } from '../../../asset'
 import {fonts, colors} from '../../../utils'
 
-const HomeProfile = () => {
+const HomeProfile = ({onPress}) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}
+        onPress={onPress}>
             <Image style={{
                 height: 46,
                 width: 46,
@@ -21,7 +22,7 @@ const HomeProfile = () => {
             </View>
 
 
-        </View>
+        </TouchableOpacity>
     )
 }
 
