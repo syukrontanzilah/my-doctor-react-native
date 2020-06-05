@@ -3,9 +3,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { GetStarted, Splash, Register, 
-    Login, UploadFoto, Doctor, Message, Hospital, 
-    ChooseDoctor } from '../pages'
+import {
+    GetStarted, Splash, Register,
+    Login, UploadFoto, Doctor, Message, Hospital,
+    ChooseDoctor,
+    Chatting
+} from '../pages'
 import { BottomNavigator } from '../component';
 
 
@@ -52,6 +55,9 @@ const Router = () => {
 
             <Stack.Screen
                 name='ChooseDoctor' component={ChooseDoctor} />
+
+            <Stack.Screen
+                name='Chatting' component={Chatting} />
 
         </Stack.Navigator>
     )

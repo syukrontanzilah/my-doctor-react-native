@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { colors, fonts } from '../../../utils'
 import { IconNext } from '../../../asset'
 
-const ListChatDoctor = ({profil, name, chat, type}) => {
+const ListChatDoctor = ({profil, name, chat, type, onPress}) => {
     return (
-        <View style={styles.conteiner}>
+        <TouchableOpacity style={styles.conteiner}
+        onPress={onPress}>
             <Image source={profil} style={styles.Avatar} />
             <View style={styles.content}>
                 <Text style={styles.name}>{name}</Text>
@@ -16,7 +17,7 @@ const ListChatDoctor = ({profil, name, chat, type}) => {
             }
 
 
-        </View>
+        </TouchableOpacity>
     )
 }
 

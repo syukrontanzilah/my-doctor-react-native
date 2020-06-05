@@ -8,6 +8,8 @@ import IconHospital from './carirs.svg'
 import IconHospitalActive from './carirumahsakit.svg';
 import IconStart from './star.svg';
 import IconNext  from './next-arrow.svg';
+import IconSend from './send.svg';
+import IconSendActive from './send-active.svg';
 
 
 export {
@@ -21,5 +23,7 @@ export {
     IconStart,
     IconNext,
     IconBackLight,
+    IconSend,
+    IconSendActive,
 
 }
