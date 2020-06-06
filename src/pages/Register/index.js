@@ -1,16 +1,23 @@
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { Header, Input, Button, Gap } from '../../component'
-import { colors } from '../../utils'
+import { colors, useForm } from '../../utils'
 
 const Register = ({navigation}) => {
-    const [fullName, setFullName] = useState('');
-    const [profesi, setProfesi] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    // const [fullName, setFullName] = useState('');
+    // const [profesi, setProfesi] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+
+    const [form, setForm] = useForm({
+        fullName: '',
+        profesi: '',
+        email: '',
+        password: '',
+    })
 
     const onContinue = () => {
-        console.log(fullName, profesi, email, password)
+        console.log(form)
        // navigation.navigate('UploadFoto')
     }
 
@@ -21,30 +28,30 @@ const Register = ({navigation}) => {
             <ScrollView style ={styles.content}>
                 <Input 
                 label='Full Name'
-                value={fullName} 
-                 onChangeText={value => setFullName(value)}
+                value={form.fullName} 
+                 onChangeText={value => setForm('fullName',value)}
                 />
                 <Gap height={24}/>
 
                 <Input 
                 label='Pekerjaan'
-                value={profesi} 
-                 onChangeText={value=> setProfesi(value)}
+                value={form.profesi} 
+                 onChangeText={value=> setForm('profesi', value)}
                 />
                 <Gap height={24}/>
 
                 <Input 
                 label='Email Address'
-                value={email} 
-                   onChangeText={(value)=> setEmail(value)}
+                value={form.email} 
+                   onChangeText={(value)=> setForm('email',value)}
                 />
                 <Gap height={24}/>
 
                 <Input 
                 label='Password'
-                value={password} 
+                value={form.password} 
                 secureTextEntry
-                 onChangeText={(value)=> setPassword(value)}
+                 onChangeText={(value)=> setForm('password',value)}
                 />
                 <Gap height={28}/>
 
