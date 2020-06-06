@@ -6,7 +6,7 @@ import { fonts, colors } from '../../utils'
 const Chatting = ({navigation}) => {
     return (
         <View style={styles.page}>
-            <Header type='dark-profile' title='Nabilah Kinarsih'  
+            <Header type='dark-profile' title='Fii Hawa'  
             onPress={()=> navigation.goBack()}
             />
             <View style={styles.content}>

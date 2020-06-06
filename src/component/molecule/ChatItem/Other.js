@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { fonts, colors } from '../../../utils'
-import { DoctorWanita1, DoctorWanita2, DoctorWanita3 } from '../../../asset'
+import { DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita7 } from '../../../asset'
 
 
 const Other = () => {
     return (
         <View style={styles.container}>
-            <Image style={{ height: 30, width: 30, marginRight: 12, borderRadius: 40 / 2, }} source={DoctorWanita3} />
+            <Image style={{ height: 30, width: 30, marginRight: 12, borderRadius: 40 / 2, }} source={DoctorWanita7} />
 
             <View>
             <View style={styles.chatContent}>

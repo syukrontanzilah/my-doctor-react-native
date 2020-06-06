@@ -50,24 +50,7 @@ const Hospital = () => {
                 pict={Hospital1}
                 address ='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat' />
                 
-                <ListHospital 
-                type='Klinik Bersalin' 
-                name='Bunda Kandung'
-                pict={Hospital2}
-                address ='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat' />
-                
-                <ListHospital 
-                type='Puskesmas'
-                name='Selamat Sejahtera'
-                pict={Hospital3}
-                address ='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat'  />
-                
-                <ListHospital 
-                type='Rumah Sakit'
-                name='Muara Kasih'
-                pict={Hospital1}
-                address ='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat'  />
-
+          
                 <Gap height={100} />
             </ScrollView>
 
