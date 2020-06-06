@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { Header, Input, Button, Gap, Loading } from '../../component'
 import { colors, useForm } from '../../utils'
 import { Fire } from '../../config'
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const Register = ({ navigation }) => {
     // const [fullName, setFullName] = useState('');
@@ -17,10 +18,12 @@ const Register = ({ navigation }) => {
         password: '',
     });
 
-    const [loading, setLoading ] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const onContinue = () => {
         console.log(form);
+
+
         setLoading(true);
         Fire.auth()
             .createUserWithEmailAndPassword(form.email, form.password)
@@ -32,8 +35,16 @@ const Register = ({ navigation }) => {
             .catch(error => {
                 const errorMessage = error.message;
                 setLoading(false);
-                console.log('error register: ', errorMessage)
+                showMessage({
+                    message: errorMessage,
+                    type: 'default',
+                    backgroundColor: colors.error,
+                    color: colors.white,
+                    duration:2000
+                });
+                console.log('error: ', error)
             });
+
         // navigation.navigate('UploadFoto')
     }
 
@@ -78,10 +89,10 @@ const Register = ({ navigation }) => {
                 </ScrollView>
             </View>
             {
-                loading &&  <Loading />
+                loading && <Loading />
             }
 
-           
+
         </>
     );
 };
