@@ -4,10 +4,10 @@ import { IconBackDark, IconBackLight } from '../../../asset'
 
 
 
-const IconOnly = ({ onPress, icon }) => {
+const IconOnly = ({ onPress, icon, }) => {
     const Icon = () => {
         if (icon === 'back-dark') {
-            return <IconBackDark />
+            return <IconBackDark /> 
         }
         if (icon === 'back-light') {
             return <IconBackLight />

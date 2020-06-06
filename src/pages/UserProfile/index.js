@@ -2,14 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import {Header, Profile, List, Gap} from '../../component'
 import { colors } from '../../utils'
+import { User2 } from '../../asset'
 
 
 const UserProfile = ({navigation}) => {
     return (
         <View style={styles.page}>
-            <Header title ='Profile' />
+            <Header title ='Profile'
+            onPress={()=>navigation.goBack()} />
             <Gap height={10}/>
-            <Profile name='Zulaikha Alfikriah' desc='finance Officer'/>
+            <Profile name='Ana Musytaq Yahabibi' desc='finance Officer'
+            avatar={User2}/>
             <Gap height={15}/>
          
 

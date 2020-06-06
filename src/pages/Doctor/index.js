@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HomeProfile, DoktorKategori, RatingDoctor, NewsItem, Gap } from '../../component'
 import { fonts, colors } from '../../utils'
-import {JSONCategoryDoctor} from '../../asset'
+import {JSONCategoryDoctor, DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita4, DoctorWanita5, DoctorWanita6, DoctorWanita7, Doctor1, DoctorPria1, DoctorPria2, DoctorPria3, DoctorPria4, DoctorPria5, DoctorPria6} from '../../asset'
 
 const Doctor = ({navigation}) => {
     return (
@@ -12,7 +12,11 @@ const Doctor = ({navigation}) => {
                     showsVerticalScrollIndicator={false}>
                     <Gap height={20} />
                     <View style={{paddingHorizontal:16}}>
-                       <HomeProfile onPress={()=> navigation.navigate('UserProfile')} />
+                              <HomeProfile onPress={()=> navigation.navigate('UserProfile')} />
+                     </View>
+
+                 
+                    <View style={{paddingHorizontal:16}}>
                     <Text style={styles.welcome}>Mau Konsultasi dengan siapa hari ini?</Text>
                     </View>
                  
@@ -41,9 +45,21 @@ const Doctor = ({navigation}) => {
 
                     <View style={{ paddingHorizontal: 16 }}>
                         <Text style={styles.sectionLabel}>Top Rating dokter</Text>
-                        <RatingDoctor />
-                        <RatingDoctor />
-                        <RatingDoctor />
+                        <RatingDoctor 
+                        name= 'Fii Hawa' 
+                        desc='Dokter Gigi'
+                        avatar ={DoctorWanita7}
+                        onPress={()=>navigation.navigate('DoctorProfile')}/>
+                        
+                        <RatingDoctor 
+                        name='Aini Lighoiri Jamalikum' 
+                        desc ='Dokter Anak'
+                        avatar ={DoctorWanita4}/>
+                        
+                        <RatingDoctor 
+                        name= 'Tanzil Mushohabaturrijal' 
+                        desc='Dokter Specialist Hati'
+                        avatar = {DoctorPria3}/>
                     </View>
 
                     <View style={{paddingHorizontal:16}}>
@@ -68,23 +84,28 @@ const styles = StyleSheet.create({
         flex: 1
     },
     content: {
-        backgroundColor: colors.white, flex: 1,
+        backgroundColor: colors.white, 
+        flex: 1,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20
     },
     welcome: {
         fontSize: 20,
         fontFamily: fonts.primary[800],
-        color: colors.text.primary, marginTop: 30, marginBottom: 10,
+        color: colors.text.primary, 
+        marginTop: 30, 
+        marginBottom: 10,
         maxWidth: 209,
     },
     doctorCategory: {
         flexDirection: 'row',
     },
     sectionLabel: {
-        fontSize: 16, fontFamily: fonts.primary[800],
+        fontSize: 16, 
+        fontFamily: fonts.primary[800],
         color: colors.text.primary,
         marginTop: 30,
         marginBottom: 16
     }
 })
+

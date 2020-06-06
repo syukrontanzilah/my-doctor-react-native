@@ -9,13 +9,18 @@ import {
     ChooseDoctor,
     Chatting,
     UserProfile,
-    EditProfile
+    EditProfile, DoctorProfile
 } from '../pages'
 import { BottomNavigator } from '../component';
 
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
+const forFade = ({ current }) => ({
+    cardStyle: {
+        opacity: current.progress,
+    },
+})
 
 const MainApp = () => {
     return (
@@ -34,7 +39,10 @@ const Router = () => {
     return (
         <Stack.Navigator
             initialRouteName='Splash'
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ 
+                headerShown: false,
+                cardStyleInterpolator: forFade
+             }}
         >
 
             <Stack.Screen
@@ -66,6 +74,9 @@ const Router = () => {
            
             <Stack.Screen
                 name='EditProfile' component={EditProfile} />
+
+            <Stack.Screen
+                name='DoctorProfile' component={DoctorProfile} />
 
         </Stack.Navigator>
     )

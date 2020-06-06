@@ -5,24 +5,25 @@ import {fonts, colors} from '../../../utils'
 
 const HomeProfile = ({onPress}) => {
     return (
-        <TouchableOpacity style={styles.container}
+             <TouchableOpacity style={styles.container}
         onPress={onPress}>
             <Image style={{
-                height: 46,
-                width: 46,
-                backgroundColor: 'gray',
-                borderRadius: 46 / 2,
-                marginRight:12
+                height: 45,
+                width: 45,
+                borderRadius: 45 / 2,
+                marginRight:12,
             }}
                 source={User2} />
 
-            <View style={{}}>
-                <Text style={styles.name}>Zulaikha Alfikriah</Text>
+            <View style={{justifyContent:'center'}}>
+                <Text style={styles.name}>Ana Musytaq Yahabibi</Text>
                 <Text style={styles.profesi}>Finance Officer</Text>
             </View>
-
-
         </TouchableOpacity>
+      
+
+     
+       
     )
 }
 
@@ -30,8 +31,7 @@ export default HomeProfile
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row'
-
+        flexDirection: 'row',
     },
     name: {
         fontSize:16,

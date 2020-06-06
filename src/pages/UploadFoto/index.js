@@ -4,7 +4,7 @@ import { Header, Button, Link, Gap } from '../../component'
 import { ILnull, ILLogo } from '../../asset'
 import { colors, fonts } from '../../utils'
 
-const UploadFoto = () => {
+const UploadFoto = ({navigation}) => {
     return (
         <View style={{ flex: 1, backgroundColor: 'white', }}>
             <Header title='Upload Photo' />
@@ -31,9 +31,11 @@ const UploadFoto = () => {
                 </View>
 
                 <View style={{ justifyContent:'center', }}>
-                    <Button title='Upload and Continue' />
+                    <Button title='Upload and Continue' 
+                      onPress={()=> navigation.replace('MainApp')}/>
                     <Gap height={30} />
-                    <Link title='Skip for this' align='center' size={16} />
+                    <Link title='Skip for this' align='center' size={16} 
+                    onPress={()=> navigation.replace('MainApp')} />
                 </View>
             </View>
 

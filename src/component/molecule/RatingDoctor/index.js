@@ -1,19 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { Doctor1, Doctor2, Doctor3, Doctor4 } from '../../../asset/dummy'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { IconStart } from '../../../asset'
 import { fonts, colors } from '../../../utils'
 
-const RatingDoctor = () => {
+const RatingDoctor = ({onPress, name, desc, avatar}) => {
     return (
-        <View style={styles.container}>
-            <Image style={{ height: 50, width: 50, borderRadius: 50 / 2, marginRight: 12 }} source={Doctor3} />
+        <TouchableOpacity style={styles.container}
+        onPress={onPress}>
+            <Image style={{ height: 50, width: 50, borderRadius: 50 / 2, marginRight: 12 }} source={avatar} />
 
             <View style={{flex:1}}>
-                <Text style={styles.name}>Muhammad Fikri</Text>
-                <Text style={styles.doctor}>Dokter Gigi</Text>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.doctor}>{desc}</Text>
             </View>
-
 
             <View style={styles.star}>
                 <IconStart />
@@ -21,10 +20,8 @@ const RatingDoctor = () => {
                 <IconStart />
                 <IconStart />
                 <IconStart />
-
-
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

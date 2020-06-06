@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import { User1, User2, IconRemove } from '../../../asset'
 import { colors, fonts } from '../../../utils'
 
-const Profile = ({ name, desc, remove }) => {
+const Profile = ({ name, desc, isRemove, avatar }) => {
     return (
         <View style={styles.container}>
             <View style={styles.borderProfile}>
-                <Image style={styles.avatar} source={User2} />
-                {remove && (
-                    <IconRemove style={{ position: 'absolute', bottom: 5, right: 8, backgroundColor: 'white', borderRadius: 100 }} />
+                <Image style={styles.avatar} source={avatar} />
+                {isRemove && (
+                    <IconRemove style={{ position: 'absolute', bottom: 5, right: 8, backgroundColor: 'white', borderRadius: 100,}} />
                 )}
             </View>
             {name && (
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: fonts.primary[800],
         color: colors.text.primary,
-        marginTop: 16
+        textAlign: 'center',
+        marginTop: 16, 
     },
     profesi: {
         fontSize: 16,
