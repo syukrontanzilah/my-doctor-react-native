@@ -38,7 +38,7 @@ const MainApp = () => {
 const Router = () => {
     return (
         <Stack.Navigator
-            initialRouteName='UploadFoto'
+            initialRouteName='Splash'
             screenOptions={{ 
                 headerShown: false,
                 cardStyleInterpolator: forFade
