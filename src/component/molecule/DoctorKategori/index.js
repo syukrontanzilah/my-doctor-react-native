@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { ILLogo, ILtambah, ILnull, ILPlus } from '../../../asset'
+import { ILLogo, ILtambah, ILnull, ILPlus, ILLuv } from '../../../asset'
 import { colors, fonts } from '../../../utils'
 
 const DoktorKategori = ({ category, onPress }) => {
@@ -17,7 +17,7 @@ const DoktorKategori = ({ category, onPress }) => {
         }
         if (category === 'Psikiater') {
             return <View style={{ height: 50, width: 50, marginBottom: 28 }}>
-                <ILnull />
+                <ILLuv />
             </View>
         } if(category === 'Dokter Specialist'){
             return <View style={{ height: 50, width: 50, marginBottom: 28 }}>

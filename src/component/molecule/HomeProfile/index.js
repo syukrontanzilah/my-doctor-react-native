@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { User2, ILnull, } from '../../../asset'
+import { User2, ILnull, ILKosong, } from '../../../asset'
 import { fonts, colors, getData } from '../../../utils'
 
 const HomeProfile = ({ onPress }) => {
@@ -23,9 +23,10 @@ const HomeProfile = ({ onPress }) => {
     return (
         <TouchableOpacity style={styles.container}
             onPress={onPress}>
-                {/* <View style={{}}>
-                    <ILnull style={{}}/>
-                </View> */}
+                <View style={{position:'relative', height:45, width:45, borderRadius:45/2, justifyContent:'center', alignItems:'center', marginRight:12}}>
+                    <Image source={require('../../../asset/ilustration/user.png')} style={{height:40, width:40, opacity:0.2}}/>
+                </View>
+                
                 
             <Image style={{
                 height: 45,
@@ -34,8 +35,8 @@ const HomeProfile = ({ onPress }) => {
                 marginRight: 12,
                 borderWidth:1,
                 borderColor: '#d4d4d4',
-                backgroundColor:'#d4d4d4'
-                //position:'absolute'
+                //backgroundColor:'#d4d4d4',
+                position:'absolute'
             }}
                 source={profile.photo} />
 
