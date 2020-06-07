@@ -1,48 +1,68 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { Header, Button, Link, Gap } from '../../component'
 import { ILnull, ILLogo, IconPlus, IconRemove } from '../../asset'
-import { colors, fonts } from '../../utils'
+import { colors, fonts } from '../../utils';
+import ImagePicker from 'react-native-image-picker';
 
 const UploadFoto = ({ navigation }) => {
-    const [hasPhoto, setHasPhoto] = useState(false)
+    const [hasPhoto, setHasPhoto] = useState(false);
+    const [photo, setPhoto] = useState(ILnull)
+    const getImageFromGallery = () => {
+        ImagePicker.launchImageLibrary({}, response => {
+            console.log('response: ', response)
+            const source = { uri: response.uri }
+            setPhoto(source)
+            setHasPhoto(true)
+        });
+    }
     return (
         <View style={{ flex: 1, backgroundColor: 'white', }}>
             <Header title='Upload Photo' />
 
             <View style={{ justifyContent: 'space-between', flex: 1, paddingHorizontal: 40, paddingBottom: 40, paddingTop: 50 }}>
 
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1
+                }}>
                     {/* photo profil */}
-                    <View style={{ height: 120, width: 120 }}>
-                        <View style={{
+                    <TouchableOpacity
+                        onPress={getImageFromGallery}
+                        style={{
+                            height: 120, width: 120, borderWidth: 1, borderRadius: 120 / 2, borderColor: 'lightgray',
+                            alignItems: 'center', justifyContent: 'center',
+                            backgroundColor: '#d2d2d2'
+                        }}>
+                        <Image source={photo} style={{ width: 110, height: 110, borderRadius: 110 / 2, }} />
+
+
+                        {/* yg ini ngakalin aja hehe */}
+                        {/* <View style={{
                             height: 120,
                             width: 120,
-                            borderRadius: 100, backgroundColor: 'lightgray',
-                            opacity: 0.5,
+                            borderRadius: 120 / 2, backgroundColor: 'rgba(0,0,0,0.1)',
                             justifyContent: 'center', alignItems: 'center'
                         }}>
-                            <Image style={{ height: 100, width: 100, opacity: 0.5 }} source={require('../../asset/icon/user1.png')} />
-                        </View>
+                            <View style={{}}>
+                                <ILnull />
+                            </View>
+                        </View> */}
 
                         {/* icon tambah dan remove photo */}
                         {hasPhoto && <IconRemove style={{ position: 'absolute', bottom: 0, right: 8, backgroundColor: 'white', borderRadius: 100 }} />}
 
                         {!hasPhoto && <IconPlus style={{ position: 'absolute', bottom: 0, right: 8, backgroundColor: 'white', borderRadius: 100 }} />}
+                    </TouchableOpacity>
 
-
-
-
-
-                    </View>
-
-                    <Text style={styles.name}>Syukron Tanzilah</Text>
-                    <Text style={styles.profesi}>Mobile Developer</Text>
+                    <Text style={styles.name}>Nabilah Alfikriyah</Text>
+                    <Text style={styles.profesi}>Finance Officer</Text>
                 </View>
 
                 <View style={{ justifyContent: 'center', }}>
                     <Button
-                        disable
+                        disable={!hasPhoto}
                         title='Upload and Continue'
                         onPress={() => navigation.replace('MainApp')} />
                     <Gap height={30} />
