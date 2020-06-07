@@ -6,7 +6,8 @@ import { colors, fonts } from '../../utils';
 import ImagePicker from 'react-native-image-picker';
 import { showMessage } from 'react-native-flash-message'
 
-const UploadFoto = ({ navigation }) => {
+const UploadFoto = ({ navigation, route }) => {
+    const {fullName, profesi,} = route.params;
     const [hasPhoto, setHasPhoto] = useState(false);
     const [photo, setPhoto] = useState(ILnull)
     const getImageFromGallery = () => {
@@ -68,8 +69,8 @@ const UploadFoto = ({ navigation }) => {
                         {!hasPhoto && <IconPlus style={{ position: 'absolute', bottom: 0, right: 8, backgroundColor: 'white', borderRadius: 100 }} />}
                     </TouchableOpacity>
 
-                    <Text style={styles.name}>Nabilah Alfikriyah</Text>
-                    <Text style={styles.profesi}>Finance Officer</Text>
+                    <Text style={styles.name}>{fullName}</Text>
+                    <Text style={styles.profesi}>{profesi}</Text>
                 </View>
 
                 <View style={{ justifyContent: 'center', }}>
