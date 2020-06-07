@@ -5,9 +5,11 @@ import { ILnull, ILLogo, IconPlus, IconRemove } from '../../asset'
 import { colors, fonts } from '../../utils';
 import ImagePicker from 'react-native-image-picker';
 import { showMessage } from 'react-native-flash-message'
+import { Fire } from '../../config';
 
 const UploadFoto = ({ navigation, route }) => {
-    const {fullName, profesi,} = route.params;
+    const { fullName, profesi, uid } = route.params;
+    const [photoForDB, setPhotoForDB] = useState('')
     const [hasPhoto, setHasPhoto] = useState(false);
     const [photo, setPhoto] = useState(ILnull)
     const getImageFromGallery = () => {
@@ -21,13 +23,23 @@ const UploadFoto = ({ navigation, route }) => {
                     duration: 3000
                 });
             } else {
+                console.log('response getImage: ', response)
                 const source = { uri: response.uri }
+                setPhotoForDB(`data:${response.type};base64, ${response.data}`);
                 setPhoto(source)
                 setHasPhoto(true)
             }
 
         });
     }
+
+    const uploadAndContinue = () => {
+        Fire
+            .database()
+            .ref('users/' + uid + '/')
+            .update({ photo: photoForDB });
+            navigation.replace('MainApp')
+    };
     return (
         <View style={{ flex: 1, backgroundColor: 'white', }}>
             <Header title='Upload Photo' />
@@ -77,7 +89,7 @@ const UploadFoto = ({ navigation, route }) => {
                     <Button
                         disable={!hasPhoto}
                         title='Upload and Continue'
-                        onPress={() => navigation.replace('MainApp')} />
+                        onPress={uploadAndContinue} />
                     <Gap height={30} />
                     <Link
                         title='Skip for this'
