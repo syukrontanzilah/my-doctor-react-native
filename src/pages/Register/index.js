@@ -30,6 +30,18 @@ const Register = ({ navigation }) => {
             .then(success => {
                 setLoading(false);
                 setForm('reset');
+
+                const data = {
+                    fullName: form.fullName,
+                    profesi: form.profesi,
+                    email: form.email,
+                }
+
+                Fire
+                    .database()
+                    .ref('users/' + success.user.uid + '/')
+                    .set(data);
+
                 console.log('register success: ', success)
             })
             .catch(error => {
@@ -40,7 +52,7 @@ const Register = ({ navigation }) => {
                     type: 'default',
                     backgroundColor: colors.error,
                     color: colors.white,
-                    duration:2000
+                    duration: 2000
                 });
                 console.log('error: ', error)
             });
