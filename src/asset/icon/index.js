@@ -15,6 +15,7 @@ import IconLanguage from './language.svg';
 import IconRate from './rating.svg';
 import IconHelp from './help.svg';
 import IconRemove from './close-button.svg';
+import IconPlus from './plus.svg'
 
 
 export {
@@ -32,6 +33,6 @@ export {
     IconSendActive,
     IconEditProfile, IconLanguage,
     IconRate, IconHelp,
-    IconRemove,
+    IconRemove, IconPlus
 
 }

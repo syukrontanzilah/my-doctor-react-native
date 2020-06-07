@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { Header, Button, Link, Gap } from '../../component'
-import { ILnull, ILLogo } from '../../asset'
+import { ILnull, ILLogo, IconPlus, IconRemove } from '../../asset'
 import { colors, fonts } from '../../utils'
 
-const UploadFoto = ({navigation}) => {
+const UploadFoto = ({ navigation }) => {
+    const [hasPhoto, setHasPhoto] = useState(false)
     return (
         <View style={{ flex: 1, backgroundColor: 'white', }}>
             <Header title='Upload Photo' />
 
-            <View style={{ justifyContent: 'space-between', flex:1, paddingHorizontal:40, paddingBottom:40, paddingTop:50  }}>
+            <View style={{ justifyContent: 'space-between', flex: 1, paddingHorizontal: 40, paddingBottom: 40, paddingTop: 50 }}>
 
-                <View style={{ justifyContent:'center', alignItems:'center' }}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     {/* photo profil */}
                     <View style={{ height: 120, width: 120 }}>
                         <View style={{
@@ -23,19 +24,33 @@ const UploadFoto = ({navigation}) => {
                         }}>
                             <Image style={{ height: 100, width: 100, opacity: 0.5 }} source={require('../../asset/icon/user1.png')} />
                         </View>
-                        <Image style={{ height: 40, width: 40, opacity: 0.3, position: 'absolute', bottom: 8, right: 6, backgroundColor: 'darkblue', borderRadius: 100 }} source={require('../../asset/icon/add.png')} />
+
+                        {/* icon tambah dan remove photo */}
+                        {hasPhoto && <IconRemove style={{ position: 'absolute', bottom: 0, right: 8, backgroundColor: 'white', borderRadius: 100 }} />}
+
+                        {!hasPhoto && <IconPlus style={{ position: 'absolute', bottom: 0, right: 8, backgroundColor: 'white', borderRadius: 100 }} />}
+
+
+
+
+
                     </View>
 
                     <Text style={styles.name}>Syukron Tanzilah</Text>
                     <Text style={styles.profesi}>Mobile Developer</Text>
                 </View>
 
-                <View style={{ justifyContent:'center', }}>
-                    <Button title='Upload and Continue' 
-                      onPress={()=> navigation.replace('MainApp')}/>
+                <View style={{ justifyContent: 'center', }}>
+                    <Button
+                        disable
+                        title='Upload and Continue'
+                        onPress={() => navigation.replace('MainApp')} />
                     <Gap height={30} />
-                    <Link title='Skip for this' align='center' size={16} 
-                    onPress={()=> navigation.replace('MainApp')} />
+                    <Link
+                        title='Skip for this'
+                        align='center'
+                        size={16}
+                        onPress={() => navigation.replace('MainApp')} />
                 </View>
             </View>
 
@@ -52,8 +67,8 @@ const styles = StyleSheet.create({
         color: colors.text.primary,
         fontFamily: fonts.primary[800],
         textAlign: 'center',
-        marginTop:20,
-        opacity:0.7
+        marginTop: 20,
+        opacity: 0.7
     },
     profesi: {
         fontSize: 16,
