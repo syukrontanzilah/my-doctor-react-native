@@ -1,25 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HomeProfile, DoktorKategori, RatingDoctor, NewsItem, Gap } from '../../component'
-import { fonts, colors } from '../../utils'
-import {JSONCategoryDoctor, DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita4, DoctorWanita5, DoctorWanita6, DoctorWanita7, Doctor1, DoctorPria1, DoctorPria2, DoctorPria3, DoctorPria4, DoctorPria5, DoctorPria6} from '../../asset'
+import { fonts, colors, getData } from '../../utils'
+import { JSONCategoryDoctor, DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita4, DoctorWanita5, DoctorWanita6, DoctorWanita7, Doctor1, DoctorPria1, DoctorPria2, DoctorPria3, DoctorPria4, DoctorPria5, DoctorPria6 } from '../../asset'
 
-const Doctor = ({navigation}) => {
+const Doctor = ({ navigation }) => {
+
     return (
         <View style={styles.page}>
             <View style={styles.content}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
                     <Gap height={20} />
-                    <View style={{paddingHorizontal:16}}>
-                              <HomeProfile onPress={()=> navigation.navigate('UserProfile')} />
-                     </View>
-
-                 
-                    <View style={{paddingHorizontal:16}}>
-                    <Text style={styles.welcome}>Mau Konsultasi dengan siapa hari ini?</Text>
+                    <View style={{ paddingHorizontal: 16 }}>
+                        <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
                     </View>
-                 
+
+
+                    <View style={{ paddingHorizontal: 16 }}>
+                        <Text style={styles.welcome}>Mau Konsultasi dengan siapa hari ini?</Text>
+                    </View>
+
                     <View style={{ marginHorizontal: -16 }}>
                         <ScrollView horizontal
                             showsHorizontalScrollIndicator={false} >
@@ -27,10 +28,10 @@ const Doctor = ({navigation}) => {
                                 <Gap width={32} />
                                 {
                                     JSONCategoryDoctor.data.map(item => {
-                                        return   <DoktorKategori 
-                                        key={item.id}
-                                        category ={item.category}
-                                        onPress={()=> navigation.navigate('ChooseDoctor')}/>
+                                        return <DoktorKategori
+                                            key={item.id}
+                                            category={item.category}
+                                            onPress={() => navigation.navigate('ChooseDoctor')} />
                                     })
                                 }
 
@@ -45,24 +46,24 @@ const Doctor = ({navigation}) => {
 
                     <View style={{ paddingHorizontal: 16 }}>
                         <Text style={styles.sectionLabel}>Top Rating dokter</Text>
-                        <RatingDoctor 
-                        name= 'Fii Hawa' 
-                        desc='Dokter Gigi'
-                        avatar ={DoctorWanita7}
-                        onPress={()=>navigation.navigate('DoctorProfile')}/>
-                        
-                        <RatingDoctor 
-                        name='Aini Lighoiri Jamalikum' 
-                        desc ='Dokter Anak'
-                        avatar ={DoctorWanita4}/>
-                        
-                        <RatingDoctor 
-                        name= 'Tanzil Mushohabaturrijal' 
-                        desc='Dokter Specialist Hati'
-                        avatar = {DoctorPria3}/>
+                        <RatingDoctor
+                            name='Fii Hawa'
+                            desc='Dokter Gigi'
+                            avatar={DoctorWanita7}
+                            onPress={() => navigation.navigate('DoctorProfile')} />
+
+                        <RatingDoctor
+                            name='Aini Lighoiri Jamalikum'
+                            desc='Dokter Anak'
+                            avatar={DoctorWanita4} />
+
+                        <RatingDoctor
+                            name='Tanzil Mushohabaturrijal'
+                            desc='Dokter Specialist Hati'
+                            avatar={DoctorPria3} />
                     </View>
 
-                    <View style={{paddingHorizontal:16}}>
+                    <View style={{ paddingHorizontal: 16 }}>
                         <Text style={styles.sectionLabel}>Good News</Text>
                         <NewsItem />
                         <NewsItem />
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     content: {
-        backgroundColor: colors.white, 
+        backgroundColor: colors.white,
         flex: 1,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20
@@ -92,8 +93,8 @@ const styles = StyleSheet.create({
     welcome: {
         fontSize: 20,
         fontFamily: fonts.primary[800],
-        color: colors.text.primary, 
-        marginTop: 30, 
+        color: colors.text.primary,
+        marginTop: 30,
         marginBottom: 10,
         maxWidth: 209,
     },
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     sectionLabel: {
-        fontSize: 16, 
+        fontSize: 16,
         fontFamily: fonts.primary[800],
         color: colors.text.primary,
         marginTop: 30,

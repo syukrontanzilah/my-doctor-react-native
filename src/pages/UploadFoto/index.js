@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { Header, Button, Link, Gap } from '../../component'
 import { ILnull, ILLogo, IconPlus, IconRemove } from '../../asset'
-import { colors, fonts } from '../../utils';
+import { colors, fonts, storeData } from '../../utils';
 import ImagePicker from 'react-native-image-picker';
 import { showMessage } from 'react-native-flash-message'
 import { Fire } from '../../config';
@@ -38,6 +38,12 @@ const UploadFoto = ({ navigation, route }) => {
             .database()
             .ref('users/' + uid + '/')
             .update({ photo: photoForDB });
+
+            const data = route.params;
+            data.photo = photoForDB;
+
+            storeData('user', data)
+         
             navigation.replace('MainApp')
     };
     return (
