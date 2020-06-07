@@ -4,6 +4,7 @@ import { Header, Button, Link, Gap } from '../../component'
 import { ILnull, ILLogo, IconPlus, IconRemove } from '../../asset'
 import { colors, fonts } from '../../utils';
 import ImagePicker from 'react-native-image-picker';
+import { showMessage } from 'react-native-flash-message'
 
 const UploadFoto = ({ navigation }) => {
     const [hasPhoto, setHasPhoto] = useState(false);
@@ -11,9 +12,19 @@ const UploadFoto = ({ navigation }) => {
     const getImageFromGallery = () => {
         ImagePicker.launchImageLibrary({}, response => {
             console.log('response: ', response)
-            const source = { uri: response.uri }
-            setPhoto(source)
-            setHasPhoto(true)
+            if (response.didCancel || response.error) {
+                showMessage({
+                    message: 'oops kamu sepertinya tidak memilih fotonya?',
+                    type: 'default',
+                    backgroundColor: colors.error,
+                    duration: 3000
+                });
+            } else {
+                const source = { uri: response.uri }
+                setPhoto(source)
+                setHasPhoto(true)
+            }
+
         });
     }
     return (
@@ -31,11 +42,12 @@ const UploadFoto = ({ navigation }) => {
                     <TouchableOpacity
                         onPress={getImageFromGallery}
                         style={{
-                            height: 120, width: 120, borderWidth: 1, borderRadius: 120 / 2, borderColor: 'lightgray',
+                            height: 120, width: 120, borderWidth: 1, borderRadius: 120 / 2, borderColor: '#edeef0',
                             alignItems: 'center', justifyContent: 'center',
-                            backgroundColor: '#d2d2d2'
+                            backgroundColor: '#edeef0'
                         }}>
-                        <Image source={photo} style={{ width: 110, height: 110, borderRadius: 110 / 2, }} />
+                        <ILnull style={{}} />
+                        <Image source={photo} style={{ width: 110, height: 110, borderRadius: 110 / 2, position: 'absolute' }} />
 
 
                         {/* yg ini ngakalin aja hehe */}
