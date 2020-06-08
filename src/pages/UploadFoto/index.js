@@ -13,7 +13,8 @@ const UploadFoto = ({ navigation, route }) => {
     const [hasPhoto, setHasPhoto] = useState(false);
     const [photo, setPhoto] = useState(ILnull)
     const getImageFromGallery = () => {
-        ImagePicker.launchImageLibrary({quality: 0.6, maxWidth:250, maxHeight:250}, response => {
+        ImagePicker.launchImageLibrary(
+            {quality: 0.6, maxWidth:250, maxHeight:250}, response => {
             console.log('response: ', response)
             if (response.didCancel || response.error) {
                 showMessage({
@@ -29,8 +30,8 @@ const UploadFoto = ({ navigation, route }) => {
                 setPhoto(source)
                 setHasPhoto(true)
             }
-
-        });
+        },
+        );
     }
 
     const uploadAndContinue = () => {

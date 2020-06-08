@@ -1,17 +1,32 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { User1, User2, IconRemove } from '../../../asset'
 import { colors, fonts } from '../../../utils'
 
-const Profile = ({ name, desc, isRemove, avatar }) => {
+const Profile = ({ name, desc, isRemove, photo, onPress }) => {
     return (
         <View style={styles.container}>
-            <View style={styles.borderProfile}>
-                <Image style={styles.avatar} source={avatar} />
-                {isRemove && (
-                    <IconRemove style={{ position: 'absolute', bottom: 5, right: 8, backgroundColor: 'white', borderRadius: 100,}} />
-                )}
-            </View>
+            {
+                !isRemove && (
+                    <View style={styles.borderProfile}>
+                        <Image style={styles.avatar} source={photo} />
+                        {isRemove && (
+                            <IconRemove style={{ position: 'absolute', bottom: 5, right: 8, backgroundColor: 'white', borderRadius: 100, }} />
+                        )}
+                    </View>
+                )
+            }
+
+            {isRemove && (
+                <TouchableOpacity 
+                onPress={onPress}
+                style={styles.borderProfile}>
+                    <Image style={styles.avatar} source={photo} />
+                    {isRemove && (
+                        <IconRemove style={{ position: 'absolute', bottom: 5, right: 8, backgroundColor: 'white', borderRadius: 100, }} />
+                    )}
+                </TouchableOpacity>
+            )}
             {name && (
                 <View>
                     <Text style={styles.name}>{name}</Text>
@@ -48,7 +63,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.primary[800],
         color: colors.text.primary,
         textAlign: 'center',
-        marginTop: 16, 
+        marginTop: 16,
     },
     profesi: {
         fontSize: 16,
