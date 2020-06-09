@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { ILLogo } from '../../asset'
 import { Input, Link, Button, Gap } from '../../component/atom'
-import { colors, fonts, useForm, storeData } from '../../utils'
+import { colors, fonts, useForm, storeData, showError, showSuccess } from '../../utils'
 import { Fire } from '../../config'
-import { showMessage } from 'react-native-flash-message'
-import { Loading } from '../../component';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, } from 'react-redux'
+
 
 const Login = ({ navigation }) => {
     const [form, setForm] = useForm({
@@ -16,71 +15,60 @@ const Login = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const login = () => {
-        dispatch({type: 'SET_LOADING', value: true})
+        dispatch({ type: 'SET_LOADING', value: true })
         Fire.auth()
             .signInWithEmailAndPassword(form.email, form.password)
             .then(res => {
-                console.log('success: ', res);
-                dispatch({type: 'SET_LOADING', value: false})
-
+                dispatch({ type: 'SET_LOADING', value: false })
                 Fire.database()
                     .ref(`users/${res.user.uid}/`)
                     .once('value')
                     .then(resDB => {
-                        console.log('data user: ', resDB.val());
-                        if(resDB.val()){
+                        if (resDB.val()) {
                             storeData('user', resDB.val())
                             navigation.replace('MainApp')
                         }
                     })
             })
             .catch(err => {
-                console.log('error: ', err)
-                dispatch({type: 'SET_LOADING', value: false})
-                showMessage({
-                    message: err.message,
-                    type: 'default',
-                    duration: 3000,
-                    backgroundColor: colors.error,
-                    color: colors.white
-
-                })
+                dispatch({ type: 'SET_LOADING', value: false })
+                showError(err.message)
+                //showSuccess('Login Success')
             })
     }
 
 
-
     return (
-       
-            <ScrollView style={styles.page}>
-                <View style={{ height: 80, width: 80 }}>
-                    <ILLogo />
-                </View>
-                <Text style={styles.title}>Masuk dan mulai berkonsultasi</Text>
 
-                <Input
-                    label='Email Adress'
-                    value={form.email}
-                    onChangeText={(value) => setForm('email', value)} />
-                <Gap height={18} />
-                <Input
-                    label='Password'
-                    value={form.password}
-                    secureTextEntry
-                    onChangeText={(value) => setForm('password', value)} />
+        <ScrollView style={styles.page}>
+            <View style={{ height: 80, width: 80 }}>
+                <ILLogo />
+            </View>
+            <Text style={styles.title}>Masuk dan mulai berkonsultasi</Text>
 
-                <Gap height={10} />
-                <Link title='Forgot My Password' size={12} />
-                <Gap height={40} />
+            <Input
+                label='Email Adress'
+                value={form.email}
+                onChangeText={(value) => setForm('email', value)} />
+            <Gap height={18} />
+            <Input
+                label='Password'
+                value={form.password}
+                secureTextEntry
+                onChangeText={(value) => setForm('password', value)} />
 
-                <Button title='Sign in' onPress={login} />
+            <Gap height={10} />
+            <Link title='Forgot My Password' size={12} />
+            <Gap height={40} />
 
-                <Gap height={30} />
-                <Link title='Create New Account' size={16} align='center' 
-              
-                onPress={() => navigation.navigate('Register')} 
-                />
-            </ScrollView>
+            <Button title='Sign in' onPress={login} />
+
+            <Gap height={30} />
+            <Link title='Create New Account' size={16} align='center'
+
+                onPress={() => navigation.navigate('Register')}
+            />
+        </ScrollView>
 
     )
 }
