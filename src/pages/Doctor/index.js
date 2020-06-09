@@ -1,10 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HomeProfile, DoktorKategori, RatingDoctor, NewsItem, Gap } from '../../component'
-import { fonts, colors, getData } from '../../utils'
+import { fonts, colors, getData, showError } from '../../utils'
 import { JSONCategoryDoctor, DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita4, DoctorWanita5, DoctorWanita6, DoctorWanita7, Doctor1, DoctorPria1, DoctorPria2, DoctorPria3, DoctorPria4, DoctorPria5, DoctorPria6 } from '../../asset'
+import { Fire } from '../../config'
 
 const Doctor = ({ navigation }) => {
+    const [news, setNews] = useState([])
+    useEffect(() => {
+        Fire.database()
+            .ref('news/')
+            .once('value')
+            .then(res => {
+                console.log('data: ', res.val());
+                if (res.val()) {
+                    setNews(res.val())
+                }
+            })
+            .catch(err => {
+                showError(err.message)
+            })
+    }, [])
 
     return (
         <View style={styles.page}>
@@ -65,9 +81,17 @@ const Doctor = ({ navigation }) => {
 
                     <View style={{ paddingHorizontal: 16 }}>
                         <Text style={styles.sectionLabel}>Good News</Text>
-                        <NewsItem />
-                        <NewsItem />
-                        <NewsItem />
+
+                        {news.map(item => {
+                            return(
+                                  <NewsItem
+                                  key={item.id}
+                                  title={item.title}
+                                  date={item.date}
+                                  image={item.image} />
+                            )
+                        })}
+
                     </View>
 
 

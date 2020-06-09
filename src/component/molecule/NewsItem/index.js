@@ -1,19 +1,19 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { Rs1 } from '../../../asset'
 import { fonts, colors } from '../../../utils'
 
-const NewsItem = () => {
+const NewsItem = ({title, date, image}) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <View style={styles.judul}>
-                <Text style={styles.title}>Apakah mungkin coronavirus akan beakhir pada bulan juni?</Text>
-                <Text style={styles.day}>Today</Text>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.day}>{date}</Text>
             </View>
+            {/* kalau image nya format url, tambahkan objek uri: */}
+            <Image source={{uri: image}} style={styles.img} />
 
-            <Image source={Rs1} style={styles.img} />
-
-        </View>
+        </TouchableOpacity>
     )
 }
 
