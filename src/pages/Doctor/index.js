@@ -6,8 +6,11 @@ import { JSONCategoryDoctor, DoctorWanita1, DoctorWanita2, DoctorWanita3, Doctor
 import { Fire } from '../../config'
 
 const Doctor = ({ navigation }) => {
-    const [news, setNews] = useState([])
+    const [news, setNews] = useState([]);
+    const [categoryDoctor, setCategoryDoctor] = useState([])
+
     useEffect(() => {
+        //firebase news
         Fire.database()
             .ref('news/')
             .once('value')
@@ -20,6 +23,21 @@ const Doctor = ({ navigation }) => {
             .catch(err => {
                 showError(err.message)
             })
+        //firebase kategori dokter
+        Fire.database()
+            .ref('category_doc/')
+            .once('value')
+            .then(res => {
+                console.log('category doctor: ', res.val());
+                if (res.val()) {
+                    setCategoryDoctor(res.val())
+                }
+            })
+            .catch(err => {
+                showError(err.message)
+            })
+
+
     }, [])
 
     return (
@@ -43,7 +61,7 @@ const Doctor = ({ navigation }) => {
                             <View style={styles.doctorCategory}>
                                 <Gap width={32} />
                                 {
-                                    JSONCategoryDoctor.data.map(item => {
+                                    categoryDoctor.map(item => {
                                         return <DoktorKategori
                                             key={item.id}
                                             category={item.category}
@@ -83,12 +101,12 @@ const Doctor = ({ navigation }) => {
                         <Text style={styles.sectionLabel}>Good News</Text>
 
                         {news.map(item => {
-                            return(
-                                  <NewsItem
-                                  key={item.id}
-                                  title={item.title}
-                                  date={item.date}
-                                  image={item.image} />
+                            return (
+                                <NewsItem
+                                    key={item.id}
+                                    title={item.title}
+                                    date={item.date}
+                                    image={item.image} />
                             )
                         })}
 

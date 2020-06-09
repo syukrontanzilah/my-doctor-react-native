@@ -19,7 +19,7 @@ const DoktorKategori = ({ category, onPress }) => {
             return <View style={{ height: 50, width: 50, marginBottom: 28 }}>
                 <ILLuv />
             </View>
-        } if(category === 'Dokter Specialist'){
+        } if(category === 'Dokter Kulit'){
             return <View style={{ height: 50, width: 50, marginBottom: 28 }}>
                 <ILPlus/>
             </View> 
