@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ImageBackground, Image, ScrollView } from 'react-native'
-import { fonts, colors } from '../../utils'
+import { fonts, colors, showError } from '../../utils'
 import ListHospital from '../../component/molecule/ListHospital'
 import { Gap } from '../../component'
 import { Hospital1, Hospital2, Hospital3, } from '../../asset'
+import { Fire } from '../../config'
 
 
 const Hospital = () => {
+    const [hospital, setHospital] = useState([]);
+    useEffect(() => {
+        Fire.database().ref('hospital/')
+            .once('value')
+            .then(res => {
+                if (res.val()) {
+                    setHospital(res.val());
+                }
+            })
+            .catch(err => {
+                showError(err.message);
+            })
+    })
     return (
         <View style={styles.page}>
             {/* <ImageBackground >
@@ -26,31 +40,31 @@ const Hospital = () => {
                 showsVerticalScrollIndicator={false}
                 style={styles.content}>
 
-                <ListHospital 
-                type='Rumah Sakit'
-                pict={Hospital1}
-                name='Kebagusan'
-                address ='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat' />
-                
-                <ListHospital 
-                type='Rumah Sakit Jantung'
-                pict={Hospital2}
-                name ='Sahabat Jantung'
-                address ='Jl. Kehangatan cinta yang telah kau beri telah membuatku kangen, Kota Jakarta Timur'  />
-                
-                <ListHospital 
-                type='Rumah Sakit Jiwa'
-                name='Kasih Hati'
-                pict={Hospital3}
-                address ='Jl. Kenangan indah ini selalu teringat dan tak pernah kulupa, Jakarta Pusat'  />
-                
-                <ListHospital 
-                type='Rumah Sakit' 
-                name='Harapan Bunda'
-                pict={Hospital1}
-                address ='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat' />
-                
-          
+                {hospital.map(item => {
+                    return (
+                        <ListHospital
+                        type ={item.type}
+                        title ={item.title}
+                        address ={item.address}
+                        image ={item.image}
+                        />
+                    )
+                })}
+
+                {/* <ListHospital
+                    type='Rumah Sakit'
+                    image={Hospital1}
+                    title='Kebagusan'
+                    address='Jl. Kehampaan Hati yang telah tersakiti karena telah kau lukai, Kota Jakarta Barat' />
+
+                <ListHospital
+                    type='Rumah Sakit Jantung'
+                    image={Hospital2}
+                    title='Sahabat Jantung'
+                    address='Jl. Kehangatan cinta yang telah kau beri telah membuatku kangen, Kota Jakarta Timur' /> */}
+
+
+
                 <Gap height={100} />
             </ScrollView>
 
