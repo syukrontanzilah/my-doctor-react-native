@@ -5,6 +5,7 @@ import { Button, Gap } from '../../component'
 import { NavigationContainer } from '@react-navigation/native'
 import { colors, fonts } from '../../utils'
 
+
 const GetStarted = ({navigation}) => {
     return (
         <ImageBackground source={Bckg} style={styles.page}>

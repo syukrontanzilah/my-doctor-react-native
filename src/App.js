@@ -1,21 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './router';
 import FlashMessage from "react-native-flash-message";
+import { Loading } from './component';
+import { Provider, useSelector } from 'react-redux';
+import store from './redux/store'
 
-export default class App extends Component {
-  render() {
-    return (
-      <>
-        <NavigationContainer>
-          <Router />
-        </NavigationContainer>
-        <FlashMessage position="top" />
-      </>
-    )
-  }
+const MainApp = () => {
+  const stateGlobal = useSelector(state => state)
+  return (
+    <>
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
+      <FlashMessage position="top" />
+      {stateGlobal.loading && <Loading />}
+    </>
+  )
+
 }
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
+  )
+}
+
+export default App;
+
 
 const styles = StyleSheet.create({
 });

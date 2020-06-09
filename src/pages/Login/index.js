@@ -5,22 +5,24 @@ import { Input, Link, Button, Gap } from '../../component/atom'
 import { colors, fonts, useForm, storeData } from '../../utils'
 import { Fire } from '../../config'
 import { showMessage } from 'react-native-flash-message'
-import { Loading } from '../../component'
+import { Loading } from '../../component';
+import {useDispatch, useSelector} from 'react-redux'
 
 const Login = ({ navigation }) => {
     const [form, setForm] = useForm({
         email: '',
         password: '',
     })
-    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch();
 
     const login = () => {
-        setLoading(true)
+        dispatch({type: 'SET_LOADING', value: true})
         Fire.auth()
             .signInWithEmailAndPassword(form.email, form.password)
             .then(res => {
                 console.log('success: ', res);
-                setLoading(false)
+                dispatch({type: 'SET_LOADING', value: false})
+
                 Fire.database()
                     .ref(`users/${res.user.uid}/`)
                     .once('value')
@@ -34,7 +36,7 @@ const Login = ({ navigation }) => {
             })
             .catch(err => {
                 console.log('error: ', err)
-                setLoading(false)
+                dispatch({type: 'SET_LOADING', value: false})
                 showMessage({
                     message: err.message,
                     type: 'default',
@@ -46,8 +48,10 @@ const Login = ({ navigation }) => {
             })
     }
 
+
+
     return (
-        <>
+       
             <ScrollView style={styles.page}>
                 <View style={{ height: 80, width: 80 }}>
                     <ILLogo />
@@ -72,11 +76,12 @@ const Login = ({ navigation }) => {
                 <Button title='Sign in' onPress={login} />
 
                 <Gap height={30} />
-                <Link title='Create New Account' size={16} align='center' onPress={() => navigation.navigate('Register')} />
+                <Link title='Create New Account' size={16} align='center' 
+              
+                onPress={() => navigation.navigate('Register')} 
+                />
             </ScrollView>
 
-            {loading && <Loading />}
-        </>
     )
 }
 
