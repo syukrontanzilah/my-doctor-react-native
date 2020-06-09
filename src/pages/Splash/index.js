@@ -6,18 +6,21 @@ import { Fire } from '../../config'
 
 const Splash = ({ navigation }) => {
     useEffect(() => {
-        setTimeout(() => {
-            Fire.auth().onAuthStateChanged((user) => {
-                if(user){
+        const unsubscribe = Fire.auth().onAuthStateChanged((user) => {
+            setTimeout(() => {
+                if (user) {
                     //user lagi login
                     navigation.replace('MainApp')
-                } else{
+                } else {
                     // user logout
                     navigation.replace('GetStarted')
                 }
-            });
-        }, 2000)
-    }, [navigation])
+            }, 2000);
+        });
+        return () => unsubscribe();
+    }, [navigation]);
+
+
     return (
         <View style={styles.page}>
             <View style={{ height: 100 }}>
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: 'center',
         opacity: 0.7,
-        fontFamily:fonts.primary[800],
+        fontFamily: fonts.primary[800],
 
     }
 })
