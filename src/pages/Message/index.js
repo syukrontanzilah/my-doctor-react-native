@@ -50,12 +50,16 @@ const Message = ({ navigation }) => {
                 <Text style={styles.title}>Messages</Text>
                 {
                     historyChat.map(chat => {
+                        const dataDoctor = {
+                            id: chat.detailDoctor.uid,
+                            data: chat.detailDoctor
+                        }
                         return (<List
                             key={chat.id}
                             profil={{uri: chat.detailDoctor.photo}}
                             name={chat.detailDoctor.fullName}
                             chat={chat.lastContentChat}
-                            onPress={() => navigation.navigate('Chatting')} />
+                            onPress={() => navigation.navigate('Chatting', dataDoctor)} />
                         )
                     })
                 }
