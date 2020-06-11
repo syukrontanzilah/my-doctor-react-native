@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { Header, ChatItem, InputChat } from '../../component'
-import { fonts, colors, getData, showError } from '../../utils'
+import { fonts, colors, getData, showError, getChatTime, setDateChat } from '../../utils'
 import { Fire } from '../../config'
 
 const Chatting = ({ navigation, route }) => {
@@ -17,31 +17,29 @@ const Chatting = ({ navigation, route }) => {
 
     const chatSend = () => {
         const today = new Date()
-        const hour = today.getHours();
-        const minutes = today.getMinutes();
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const date = today.getDate();
         const data = {
             sendBy: user.uid,
-            chatDate: new Date().getTime(),
-            chatTime: `${hour}:${minutes} ${hour > 12 ? 'PM' : 'AM'}`,
+            chatDate: today.getTime(),
+            chatTime: getChatTime(today),
             chatContent: chatContent,
-        }
-        //setChatContent('');
+        };
+
+        const chatID = `${user.uid}_${
+            dataDoctor.data.uid}`
+
+        const urlFirebase = `chatting/${chatID}/allChat/${setDateChat(today)}`
+
         //kirim ke firebase
         Fire.database()
-        .ref(
-            `chatting/${user.uid}_${
-                dataDoctor.data.uid
-            }/allChat/${year}-${month}-${date}`,
+            .ref(
+                urlFirebase,
             )
-        .push(data)
-        .then(() => {
-            setChatContent('');
-        }).catch(err => {
-            showError(err.message)
-        })
+            .push(data)
+            .then(() => {
+                setChatContent('');
+            }).catch(err => {
+                showError(err.message)
+            })
     }
     return (
         <View style={styles.page}>
