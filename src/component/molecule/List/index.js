@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     chat: {
         fontSize: 13,
         fontFamily: fonts.primary[500],
-        color: colors.text.secondary
+        color: colors.text.secondary,
+        textTransform: 'capitalize'
     }
 
 })

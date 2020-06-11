@@ -101,7 +101,7 @@ const Doctor = ({ navigation }) => {
                                         return <DoktorKategori
                                             key={item.id}
                                             category={item.category}
-                                            onPress={() => navigation.navigate('ChooseDoctor')} />
+                                            onPress={() => navigation.navigate('ChooseDoctor', item)} />
                                     })
                                 }
 

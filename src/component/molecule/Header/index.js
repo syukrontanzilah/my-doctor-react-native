@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
         fontSize:20,
         color: type === 'dark' ? colors.white : colors.text.primary,
         fontFamily: fonts.primary[800],
+        textTransform: 'capitalize'
     })
 })
