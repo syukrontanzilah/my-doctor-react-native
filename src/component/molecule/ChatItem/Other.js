@@ -4,17 +4,17 @@ import { fonts, colors } from '../../../utils'
 import { DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita7 } from '../../../asset'
 
 
-const Other = () => {
+const Other = ({text, date, photo}) => {
     return (
         <View style={styles.container}>
-            <Image style={{ height: 30, width: 30, marginRight: 12, borderRadius: 40 / 2, }} source={DoctorWanita7} />
+            <Image style={{ height: 30, width: 30, marginRight: 12, borderRadius: 40 / 2, }} source={photo} />
 
             <View>
             <View style={styles.chatContent}>
-                    <Text style={styles.text}>Oh Makasih loh.. kamu juga ganteng dek.. hehehe</Text>
+                    <Text style={styles.text}>{text}</Text>
                 </View>
 
-                <Text style={styles.date}>4.29</Text>
+                <Text style={styles.date}>{date}</Text>
             </View>
 
         </View>
