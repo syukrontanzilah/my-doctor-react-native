@@ -4,16 +4,16 @@ import { colors, fonts } from '../../../utils'
 import { Button } from '../../atom'
 import { DoctorWanita1, DoctorWanita3, DoctorWanita7 } from '../../../asset'
 
-const DarkProfile = ({onPress}) => {
+const DarkProfile = ({onPress, title, desc, photo}) => {
     return (
         <View style={styles.container}>
             <Button type='icon-only' icon='back-light' onPress={onPress}/>
             <View style={styles.content}>
-                <Text style={styles.name}>Fii Hawa</Text>
-                <Text style={styles.desc}>Dokter Gigi</Text>
+                <Text style={styles.name}>{title}</Text>
+                <Text style={styles.desc}>{desc}</Text>
             </View>
 
-            <Image style={{ height: 46, width: 46, borderRadius: 46 / 2 }} source={DoctorWanita7} />
+            <Image style={{ height: 46, width: 46, borderRadius: 46 / 2 }} source={photo} />
 
         </View>
     )
