@@ -1,44 +1,62 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { List } from '../../component'
-import { colors, fonts } from '../../utils'
+import { colors, fonts, getData } from '../../utils'
 import { Doctor1, Doctor2, Doctor3 } from '../../asset'
+import { Fire } from '../../config'
 
-const Message = ({navigation}) => {
-   const [doctors,] = useState([
-        {
-            id:1,
-            profil: Doctor1,
-            name: 'dr. Alexandra Joanna',
-            chat: 'terima kasih bu atas waktunya..'
-        },
-        {
-            id:2,
-            profil: Doctor2,
-            name: 'dr. Herman Abdullah',
-            chat: 'Makasih ya pak dokter ganteng hehe.'
-        },
-        {
-            id:1,
-            profil: Doctor3,
-            name: 'dr. Muhammad Fikri',
-            chat: 'baik dokter akan saya coba..'
-        },
+const Message = ({ navigation }) => {
+    const [user, setUser] = useState({})
+    const [historyChat, setHistoryChat] = useState([])
 
-    ])
+    useEffect(() => {
+        getDataUserFromLocal()
+        const rootDB = Fire.database()
+            .ref()
+        const urlHistory = `messages/${user.uid}/`;
+        const messagesDB = rootDB.child(urlHistory);
+        messagesDB.on('value', async snapshot => {
+            //parsing
+            if (snapshot.val()) {
+                const oldData = snapshot.val();
+                const data = [];
+              
+              const promises = await Object.keys(oldData)
+                    .map(async key => {
+                        const urlUidDoctor = `doctors/${oldData[key].uidPartner}`;
+                        const detailDoctor = await rootDB.child(urlUidDoctor).once('value')
+                        data.push({
+                            id: key,
+                            detailDoctor: detailDoctor.val(),
+                            ...oldData[key],
+                        })
+                    })
+                    await Promise.all(promises);
+                setHistoryChat(data)
+            }
+
+        });
+    }, [user.uid]);
+
+    const getDataUserFromLocal = () => {
+        getData('user').then(res => {
+            setUser(res);
+        })
+    }
+
     return (
         <View style={styles.page}>
             <View style={styles.content}>
                 <Text style={styles.title}>Messages</Text>
                 {
-                    doctors.map(doctor => {
-                        return( <List
-                        key={doctor.id} 
-                        profil={doctor.profil}
-                        name={doctor.name}
-                        chat={doctor.chat}
-                        onPress={()=>navigation.navigate('Chatting')}/>
-                    )
+                    historyChat.map(chat => {
+                        return (<List
+                            key={chat.id}
+                            profil={{uri: chat.detailDoctor.photo}}
+                            name={chat.detailDoctor.fullName}
+                            chat={chat.lastContentChat}
+                            onPress={() => navigation.navigate('Chatting')} />
+                        )
                     })
                 }
             </View>
@@ -64,9 +82,9 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontFamily: fonts.primary[800],
         color: colors.text.primary,
-        marginTop:25, 
-        marginLeft:16,
-        marginBottom:10
+        marginTop: 25,
+        marginLeft: 16,
+        marginBottom: 10
     }
 
 })
