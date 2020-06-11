@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.primary[500],
         color: colors.text.secondary,
         marginTop: 4,
-        textAlign: 'center'
+        textAlign: 'center',
+        textTransform: 'capitalize'
     }
 })

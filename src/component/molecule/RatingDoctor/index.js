@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         fontSize: 12, 
         fontFamily: fonts.primary[500], 
         color: colors.text.secondary,
-        marginTop:2
+        marginTop:2,
+        textTransform:'capitalize'
     },
     star: {
         flexDirection: 'row'

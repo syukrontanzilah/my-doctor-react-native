@@ -9,7 +9,7 @@ const InputChat = ({value, onChangeText, onButtonPress}) => {
             <TextInput style={styles.textInput}
             value = {value}
             onChangeText = {onChangeText}
-                placeholder='Tulis Pesan untuk Fii Hawa' />
+                placeholder='Tulis pesan disini...' />
             <Button 
             type='btn-icon-send' 
             disable = {value.length < 1}
