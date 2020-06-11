@@ -38,7 +38,6 @@ const ChooseDoctor = ({ navigation, route }) => {
                 type='dark'
                 title={`Pilih ${itemCategory.category}`}
                 onPress={() => navigation.goBack()} />
-
             {
                 listDoctor.map(doctor => {
                     return <List
@@ -47,10 +46,8 @@ const ChooseDoctor = ({ navigation, route }) => {
                         profil={{ uri: doctor.data.photo }}
                         name={doctor.data.fullName}
                         chat={doctor.data.gender} type='next' />
-
                 })
             }
-
         </View>
     )
 }
