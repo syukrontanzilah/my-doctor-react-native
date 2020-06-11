@@ -2,28 +2,51 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HomeProfile, DoktorKategori, RatingDoctor, NewsItem, Gap } from '../../component'
 import { fonts, colors, getData, showError } from '../../utils'
-import { JSONCategoryDoctor, DoctorWanita1, DoctorWanita2, DoctorWanita3, DoctorWanita4, DoctorWanita5, DoctorWanita6, DoctorWanita7, Doctor1, DoctorPria1, DoctorPria2, DoctorPria3, DoctorPria4, DoctorPria5, DoctorPria6 } from '../../asset'
 import { Fire } from '../../config'
 
 const Doctor = ({ navigation }) => {
     const [news, setNews] = useState([]);
     const [categoryDoctor, setCategoryDoctor] = useState([])
+    const [doctors, setDoctors] = useState([])
 
     useEffect(() => {
-        //firebase news
+        getCategoryDoctor();
+        getTopRatedDoctor()
+        getNews();
+    }, [])
+
+
+
+    //nampilin top rating dokter
+    const getTopRatedDoctor = () => {
         Fire.database()
-            .ref('news/')
+            .ref('doctors/')
+            //query urukan berdasarkan rating max 3
+            .orderByChild('rate')
+            .limitToLast(4)
             .once('value')
             .then(res => {
-                console.log('data: ', res.val());
+                console.log('top rated doctor: ', res.val());
                 if (res.val()) {
-                    setNews(res.val())
+                    const oldData = res.val()
+                    const data = [];
+                    Object.keys(oldData).map(key => {
+                        data.push({
+                            id: key,
+                            data: oldData[key]
+                        });
+                    });
+                    setDoctors(data)
                 }
             })
             .catch(err => {
                 showError(err.message)
             })
-        //firebase kategori dokter
+
+    }
+
+    //firebase kategori dokter
+    const getCategoryDoctor = () => {
         Fire.database()
             .ref('category_doc/')
             .once('value')
@@ -36,9 +59,23 @@ const Doctor = ({ navigation }) => {
             .catch(err => {
                 showError(err.message)
             })
+    }
 
-
-    }, [])
+    //firebase news
+    const getNews = () => {
+        Fire.database()
+            .ref('news/')
+            .once('value')
+            .then(res => {
+                console.log('data: ', res.val());
+                if (res.val()) {
+                    setNews(res.val())
+                }
+            })
+            .catch(err => {
+                showError(err.message)
+            })
+    }
 
     return (
         <View style={styles.page}>
@@ -49,7 +86,6 @@ const Doctor = ({ navigation }) => {
                     <View style={{ paddingHorizontal: 16 }}>
                         <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
                     </View>
-
 
                     <View style={{ paddingHorizontal: 16 }}>
                         <Text style={styles.welcome}>Mau Konsultasi dengan siapa hari ini?</Text>
@@ -80,21 +116,24 @@ const Doctor = ({ navigation }) => {
 
                     <View style={{ paddingHorizontal: 16 }}>
                         <Text style={styles.sectionLabel}>Top Rating dokter</Text>
+
+                        {
+                            doctors.map(doctor => {
+                                return <RatingDoctor
+                                    key={doctor.id}
+                                    name={doctor.data.fullName}
+                                    desc={doctor.data.profesi}
+                                    avatar={{ uri: doctor.data.photo }}
+                                    onPress={() => navigation.navigate('DoctorProfile', doctor)} /> })
+                        }
+{/* 
                         <RatingDoctor
                             name='Fii Hawa'
                             desc='Dokter Gigi'
                             avatar={DoctorWanita7}
-                            onPress={() => navigation.navigate('DoctorProfile')} />
+                            onPress={() => navigation.navigate('DoctorProfile')} /> */}
 
-                        <RatingDoctor
-                            name='Aini Lighoiri Jamalikum'
-                            desc='Dokter Anak'
-                            avatar={DoctorWanita4} />
 
-                        <RatingDoctor
-                            name='Tanzil Mushohabaturrijal'
-                            desc='Dokter Specialist Hati'
-                            avatar={DoctorPria3} />
                     </View>
 
                     <View style={{ paddingHorizontal: 16 }}>

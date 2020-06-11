@@ -4,15 +4,16 @@ import { Header, Profile, ProfileItem, Button, Gap } from '../../component'
 import { DoctorWanita4, DoctorWanita6, DoctorWanita7 } from '../../asset'
 import { colors } from '../../utils'
 
-const DoctorProfile = ({navigation}) => {
+const DoctorProfile = ({navigation, route}) => {
+    const dataDoctor = route.params;
     return (
         <View style={styles.page}>
             <Header title='Doctor Profile' onPress={()=>navigation.goBack()}/>
-            <Profile name='Fii Hawa' desc='Dokter Anak' avatar={DoctorWanita7} />
+            <Profile name={dataDoctor.data.fullName} desc={dataDoctor.data.profesi} photo ={{uri: dataDoctor.data.photo}} />
             <Gap height={10} />
 
-            <ProfileItem label='Alumnus' value='Universitas Indonesia, 2017' />
-            <ProfileItem label='Tempat Praktek' value='Rumah Sakit Sekarwangi, Sukabumi' />
+            <ProfileItem label='Alumnus' value={dataDoctor.data.university} />
+            <ProfileItem label='Tempat Praktek' value={dataDoctor.data.hospital_address} />
             <ProfileItem label='No. STR' value='04802323209' />
 
            <View style={{paddingHorizontal:30, paddingVertical:30}}>
