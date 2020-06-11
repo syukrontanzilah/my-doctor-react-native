@@ -20,16 +20,14 @@ const EditProfile = ({ navigation }) => {
     useEffect(() => {
         getData('user').then(res => {
             const data = res;
-            setPhoto({ uri: res.photo });
+            data.photoForDB = res ?.photo ?.length > 1 ? res.photo : ILnull;
+            const tempPhoto = res ?.photo ?.length > 1 ? { uri: res.photo } : ILnull;
+            setPhoto(tempPhoto);
             setProfile(data)
         });
     }, []);
 
     const update = () => {
-        console.log('profile: ', profile);
-       
-
-
         if (password.length > 0) {
             if (password.length < 6) {
                 showMessage({
@@ -39,14 +37,13 @@ const EditProfile = ({ navigation }) => {
                     color: colors.white
                 })
             } else {
-               updatePassword();
-               updateProfileData();
-               navigation.replace('MainApp')
+                updatePassword();
+                updateProfileData();
+                //navigation.replace('MainApp')
             }
         } else {
-          updateProfileData()
-          navigation.replace('MainApp')
-
+            updateProfileData()
+            //navigation.replace('MainApp')
         }
     };
 
@@ -63,28 +60,30 @@ const EditProfile = ({ navigation }) => {
                         });
                     });
             }
-        }); 
+        });
     }
 
     const updateProfileData = () => {
         const data = profile;
         data.photo = photoForDB;
         Fire.database()
-        .ref(`users/${profile.uid}/`)
-        .update(data)
-        .then(() => {
-            console.log('success: ', data);
-            storeData('user', data)
-        })
-        .catch(err => {
-            showMessage({
-                message: err.message,
-                type: 'default',
-                backgroundColor: colors.error,
-                color: colors.white
+            .ref(`users/${profile.uid}/`)
+            .update(data)
+            .then(() => {
+                storeData('user', data)
+                    .then(() => {
+                        navigation.replace('MainApp')
+                    })
             })
-        })
-    }
+            .catch(err => {
+                showMessage({
+                    message: err.message,
+                    type: 'default',
+                    backgroundColor: colors.error,
+                    color: colors.white
+                })
+            });
+    };
 
     const changeText = (key, value) => {
         setProfile({
@@ -95,8 +94,8 @@ const EditProfile = ({ navigation }) => {
 
     const getImage = () => {
         ImagePicker.launchImageLibrary(
-            { quality: 0.6, maxWidth: 250, maxHeight: 250 }, response => {
-                console.log('response: ', response)
+            { quality: 0.6, maxWidth: 250, maxHeight: 250 }, 
+            response => {
                 if (response.didCancel || response.error) {
                     showMessage({
                         message: 'oops kamu sepertinya tidak memilih fotonya?',
@@ -105,7 +104,6 @@ const EditProfile = ({ navigation }) => {
                         duration: 3000
                     });
                 } else {
-                    console.log('response getImage: ', response)
                     const source = { uri: response.uri }
                     setPhotoForDB(`data:${response.type};base64, ${response.data}`);
                     setPhoto(source)
@@ -130,13 +128,13 @@ const EditProfile = ({ navigation }) => {
                 <Input
                     label='Full Name'
                     value={profile.fullName}
-                    onChangeText={(value) => changeText('fullName', value)}
+                    onChangeText={value => changeText('fullName', value)}
                 />
                 <Gap height={24} />
 
                 <Input label='Pekerjaan'
                     value={profile.profesi}
-                    onChangeText={(value) => changeText('profesi', value)} />
+                    onChangeText={value => changeText('profesi', value)} />
                 <Gap height={24} />
 
                 <Input label='Email'
@@ -147,7 +145,7 @@ const EditProfile = ({ navigation }) => {
                 <Input label='Password'
                     secureTextEntry
                     value={password}
-                    onChangeText={(value) => setPassword(value)} />
+                    onChangeText={value => setPassword(value)} />
                 <Gap height={40} />
 
                 <View style={{ paddingBottom: 20 }}>

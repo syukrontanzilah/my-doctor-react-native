@@ -62,6 +62,18 @@ const Chatting = ({ navigation, route }) => {
             dataDoctor.data.uid}`
 
         const urlFirebase = `chatting/${chatID}/allChat/${setDateChat(today)}`
+        const urlMessageUser = `messages/${user.uid}/${chatID}`
+        const urlMessageDoctor = `messages/${dataDoctor.data.uid}/${chatID}`
+        const dataHistoryChatForUser = {
+            lastContentChat: chatContent,
+            lastChatDate: today.getTime(),
+            uidPartner: dataDoctor.data.uid,
+        }
+        const dataHistoryChatForDoctor = {
+            lastContentChat: chatContent,
+            lastChatDate: today.getTime(),
+            uidPartner: user.uid,
+        }
 
         //kirim ke firebase
         Fire.database()
@@ -71,6 +83,17 @@ const Chatting = ({ navigation, route }) => {
             .push(data)
             .then(() => {
                 setChatContent('');
+                //set history for user
+                Fire.database()
+                .ref(urlMessageUser)
+                .set(dataHistoryChatForUser)
+
+                //set history for doctor
+                Fire.database()
+                .ref(urlMessageDoctor)
+                .set(dataHistoryChatForDoctor);
+
+
             }).catch(err => {
                 showError(err.message)
             })
@@ -101,7 +124,7 @@ const Chatting = ({ navigation, route }) => {
                                                     isMe={isMe}
                                                     text={itemChat.data.chatContent}
                                                     date={itemChat.data.chatTime}
-                                                    photo = {isMe  ? null : {uri: dataDoctor.data.photo}} />
+                                                    photo={isMe ? null : { uri: dataDoctor.data.photo }} />
                                             );
                                         })
                                     }
